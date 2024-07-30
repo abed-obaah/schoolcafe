@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons'; // Make sure to install this package
 
-const GradientButton = ({ onPress }) => {
+const GradientButton = ({ onPress,label }) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.buttonContainer}>
       <LinearGradient
@@ -14,7 +14,7 @@ const GradientButton = ({ onPress }) => {
         style={styles.gradient}
       >
         <View style={styles.buttonContent}>
-          <Text style={styles.buttonText}>Create Account</Text>
+        <Text style={styles.buttonText}>{label}</Text>
           <MaterialIcons name="keyboard-arrow-right" size={24} color="#fff" />
         </View>
       </LinearGradient>

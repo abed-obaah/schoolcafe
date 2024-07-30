@@ -5,6 +5,7 @@ import SwitchSelector from "react-native-switch-selector";
 import { LinearGradient } from 'expo-linear-gradient';
 import GradientButtons  from "@/constants/Button"
 import { useAuth } from '@/context/auth';
+import ErrorNotification from './ErrorNotification'
 
 import  Register from '@/app/(auth)/Register';
 
@@ -127,36 +128,18 @@ const SignInScreen = () => {
                 onChangeText={setPassword} />
             </View>
 
-          </View><View style={{ marginBottom: 12 }}>
+          </View>
+          <View style={{ marginBottom: 12 }}>
             {/* <Text style={{ fontSize: 16, fontWeight: '400', marginVertical: 8 }}>Password</Text> */}
-            <View style={{
-              width: "100%",
-              height: 56,
-              borderColor: COLORS.Gray_200,
-              borderWidth: 1,
-              borderRadius: 8,
-              alignItems: "center",
-              justifyContent: "center",
-              paddingHorizontal: 22,
-              paddingVertical: 12,
-              // backgroundColor: COLORS.input_gray ,
-              flexDirection: "row"
-            }}>
-              <Image source={require('../../assets/icons/oui_key.png')} style={{ marginRight: 10 }} />
-              <TextInput
-                placeholder="confirm password"
-                placeholderTextColor={COLORS.Gray_300}
-                style={{ width: "100%", fontSize: 16 }}
-                secureTextEntry
-                value={password}
-                onChangeText={setPassword} />
+       
+            <View style={{ paddingBottom: 20, paddingLeft: 5, paddingTop: 10,flexDirection:"row", justifyContent:'space-between'}}>
+              <Text style={{ fontSize: 12, fontFamily: "inter" }}>Dont have an account? <Text style={{ fontWeight: "bold", color: '#1972BF', textDecorationStyle: 'solid', textDecorationLine: 'underline' }}>Create one</Text></Text>
+              <Text style={{ fontSize: 12, fontFamily: "inter" }}>Forgot Password?</Text>
             </View>
-            <View style={{ paddingBottom: 20, paddingLeft: 5, paddingTop: 10 }}>
-              <Text style={{ fontSize: 12, fontFamily: "inter" }}>Already have an account? <Text style={{ fontWeight: "bold", color: '#1972BF', textDecorationStyle: 'solid', textDecorationLine: 'underline' }}>Login</Text></Text>
-            </View>
-            <GradientButtons onPress={signIn} />
+            <GradientButtons label="Login" onPress={signIn} />
 
-          </View><View style={styles.dividerContainer}>
+          </View>
+          <View style={styles.dividerContainer}>
             <View style={styles.divider} />
             <Text style={styles.dividerText}>OR</Text>
             <View style={styles.divider} />
@@ -171,7 +154,11 @@ const SignInScreen = () => {
             <TouchableOpacity style={styles.socialButton} onPress={() => console.log('Sign in with GitHub')}>
               <Image source={require('../../assets/icons/ic_baseline-apple.png')} style={styles.socialIcon} />
             </TouchableOpacity>
-          </View></>}
+          </View>
+          <View>
+          <ErrorNotification/>
+          </View>
+          </>}
 
 
                     {selectedOption === 'm' && <><View style={{ marginBottom: 14 }}>
@@ -249,7 +236,7 @@ const SignInScreen = () => {
             <View style={{ paddingBottom: 20, paddingLeft: 5, paddingTop: 10 }}>
               <Text style={{ fontSize: 12, fontFamily: "inter" }}>Already have an account? <Text style={{ fontWeight: "bold", color: '#1972BF', textDecorationStyle: 'solid', textDecorationLine: 'underline' }}>Login</Text></Text>
             </View>
-            <GradientButtons onPress={signIn} />
+            <GradientButtons label="Create Account" onPress={signIn} />
 
           </View><View style={styles.dividerContainer}>
             <View style={styles.divider} />

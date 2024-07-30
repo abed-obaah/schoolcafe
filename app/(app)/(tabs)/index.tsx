@@ -1,120 +1,68 @@
-import React, { useState } from 'react';
-import { View, Text, Image, TextInput, Button, TouchableOpacity, StyleSheet, CheckBox } from 'react-native';
-import COLORS from '@/constants/Colorsb';
-const SignInScreen = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
+import React from 'react';
+import { View, Text, Image, StyleSheet,StatusBar } from 'react-native';
+import logo from '@/assets/icons/clearLogo.png'; // Path to your main logo
+import smallIcon from '@/assets/icons/verify.png'; // Path to your small icon
+import Search from 
 
+const HomePage = () => {
   return (
-    <View style={styles.container}>
-    <Text>Home Page</Text>
-    </View>
+      <View style={styles.container}>
+        <StatusBar 
+                barStyle="light-content" // Status bar text color
+                backgroundColor="black"  // Status bar background color
+            />
+          <View style={styles.homepage}>
+              <View style={styles.imageContainer}>
+                  <Image source={logo} style={styles.logo} />
+                  <Image source={smallIcon} style={styles.smallIcon} />
+              </View>
+          </View>
+          <View style={styles.section}>
+              <Text style={styles.sectionText}>Second Section</Text>
+          </View>
+      </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'row',
+      flex: 1,
   },
-  formContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 20,
+  homepage: {
+      flex: 1,
+      backgroundColor: 'black',
+      justifyContent: 'center', // Center vertically
+      alignItems: 'center',     // Center horizontally
+  },
+  imageContainer: {
+      flexDirection: 'row',    // Align items side by side
+      alignItems: 'center',    // Center items vertically
+      width: '100%',           // Full width
+      position: 'relative',    // Needed for positioning small icon absolutely
+      marginTop: -250
   },
   logo: {
-    height: 40,
-    width: 'auto',
-    alignSelf: 'center',
+      width: 80,  // Size of the main logo
+      height: 80,
+      position: 'absolute',
+      left: '50%',    // Center the logo horizontally
+      transform: [{ translateX: -35 }], // Adjust by half the logo width to center it
   },
-  title: {
-    marginTop: 20,
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#1F2937',
-    textAlign: 'center',
+  smallIcon: {
+      position: 'absolute',
+      right: 10,    // Align small icon to the right edge
+      bottom: -20,   // Align small icon to the bottom of the imageContainer
+      width: 40,   // Size of the small icon
+      height: 40,
   },
-  subtitle: {
-    marginTop: 8,
-    fontSize: 14,
-    color: '#6B7280',
-    textAlign: 'center',
+  section: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
   },
-  link: {
-    fontWeight: 'bold',
-    color: '#4F46E5',
-  },
-  form: {
-    marginTop: 20,
-  },
-  inputGroup: {
-    marginBottom: 16,
-  },
-  label: {
-    fontSize: 14,
-    color: '#1F2937',
-    marginBottom: 4,
-  },
-  input: {
-    height: 40,
-    borderColor: '#D1D5DB',
-    borderWidth: 1,
-    borderRadius: 4,
-    paddingHorizontal: 8,
-  },
-  checkboxContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 16,
-  },
-  checkboxLabel: {
-    marginLeft: 8,
-    color: '#1F2937',
-  },
-  dividerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  divider: {
-    flex: 1,
-    height: 1,
-    backgroundColor: '#D1D5DB',
-  },
-  dividerText: {
-    marginHorizontal: 8,
-    color: '#1F2937',
-  },
-  socialContainer: {
-    marginTop: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  socialButton: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 10,
-    borderColor: '#D1D5DB',
-    borderWidth: 1,
-    borderRadius: 4,
-    marginHorizontal: 4,
-  },
-  socialIcon: {
-    height: 20,
-    width: 20,
-    marginRight: 8,
-  },
-  socialText: {
-    color: '#1F2937',
-  },
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'cover',
+  sectionText: {
+      color: 'black',
   },
 });
 
-export default SignInScreen;
+export default HomePage;
