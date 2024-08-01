@@ -1,13 +1,27 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, StatusBar, FlatList, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, StyleSheet, StatusBar, FlatList, ScrollView, Modal, TouchableOpacity } from 'react-native';
+import { BlurView } from 'expo-blur';
 import logo from '@/assets/icons/clearLogo.png'; // Path to your main logo
 import smallIcon from '@/assets/icons/verify.png'; // Path to your small icon
 import Search from '@/components/SearchForm';
-import Headers from '@/components/listHeaders'
+import Headers from '@/components/listHeaders';
 import Card from '@/components/featuredSchool';
-import News from '@/components/NewsUpdate'
-
+import News from '@/components/NewsUpdate';
+import { LinearGradient } from 'expo-linear-gradient';
+import GradientButtons  from "@/constants/Button"
+import EmailInput from '@/components/NewsLetter/EmailInput';
+import BottomSlideModal from '@/components/modal';
 const HomePage = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisibleSlide, setModalVisibleSlide] = useState(false);
+
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setModalVisible(true);
+  //   }, 3000);
+  //   return () => clearTimeout(timer);
+  // }, []);
+
   const data = [
     {
       id: '1',
@@ -67,8 +81,8 @@ const HomePage = () => {
           <Image source={logo} style={styles.logo} />
           <Image source={smallIcon} style={styles.smallIcon} />
         </View>
-        <Search/>
-        <Headers/>
+        <Search onPress={() => setModalVisibleSlide(true)} />
+        <Headers />
       </View>
       <ScrollView style={styles.section}>
         <Text style={styles.sectionText}>Featured School</Text>
@@ -84,8 +98,49 @@ const HomePage = () => {
         </View>
 
         <Text style={styles.sectionTexts}>News and Updates</Text>
-        <News/>
+        <News />
       </ScrollView>
+
+      {modalVisible && (
+        <BlurView intensity={100}  tint='dark' style={styles.absolute}>
+          <Modal
+            transparent={true}
+            animationType="fade"
+            visible={modalVisible}
+            onRequestClose={() => setModalVisible(false)}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+               
+                <View style={styles.textContainer}>
+                  <Text style={styles.title}>Subscribe Newsletter</Text>
+                  <Text style={styles.description}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </Text>
+                 
+                </View>
+                <EmailInput/>
+                <View style={styles.buttonContainer}>
+                <GradientButtons
+            label="  Subscribe to our newsletter               "
+          onPress={() => {}}
+          showIcon={false}
+          style={{ width: '100%' }}
+        />
+
+
+                  <TouchableOpacity onPress={()=>setModalVisible(false)}>
+                      <Text style={styles.cancelButtonText}>Cancel</Text>
+                  </TouchableOpacity>
+                
+                </View>
+              </View>
+            </View>
+          </Modal>
+        </BlurView>
+      )}
+  <BottomSlideModal visible={modalVisibleSlide} onClose={() => setModalVisibleSlide(false)} />
+
     </View>
   );
 };
@@ -93,13 +148,14 @@ const HomePage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#ffffff'
+    backgroundColor: '#ffffff'
   },
   homepage: {
     flex: 1,
     backgroundColor: 'black',
     justifyContent: 'center', // Center vertically
-    alignItems: 'center',     // Center horizontally
+    alignItems: 'center', 
+    // paddingVertical: -90,
   },
   imageContainer: {
     flexDirection: 'row',    // Align items side by side
@@ -126,27 +182,114 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   sectionText: {
-    color:'#2C2C2C',
-    fontSize:16,
-    padding:30,
-    fontWeight:'500'
+    color: '#2C2C2C',
+    fontSize: 16,
+    padding: 30,
+    fontWeight: '500'
   },
   sectionTexts: {
-    color:'#2C2C2C',
-    fontSize:16,
-    // padding:30,
-    fontWeight:'500',
-    marginTop:-30,
-    paddingLeft:30
+    color: '#2C2C2C',
+    fontSize: 16,
+    // padding: 30,
+    fontWeight: '500',
+    marginTop: -30,
+    paddingLeft: 30
   },
   cardListContainer: {
     paddingLeft: 20,
     paddingBottom: 20,
   },
   contentContainer: {
-    paddingLeft: 20,
+    paddingLeft: 10,
     paddingBottom: 20,
-  }
+  },
+  absolute: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // paddingHorizontal:-10
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 8,
+    padding: 46,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  iconContainer: {
+    backgroundColor: '#d1fae5',
+    borderRadius: 50,
+    padding: 10,
+  },
+  icon: {
+    width: 24,
+    height: 24,
+    tintColor: '#065f46', // Darker green tint color
+  },
+  textContainer: {
+    marginTop: 16,
+    marginBottom:20,
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#111827',
+  },
+  description: {
+    fontSize: 14,
+    color: '#6b7280',
+    textAlign: 'center',
+    marginTop: 8,
+  },
+  buttonContainer: {
+    flexDirection: 'col',
+    marginTop: 16,
+    alignContent:'center',
+    alignItems:'center'
+  },
+  button: {
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginHorizontal: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  deactivateButton: {
+    backgroundColor: '#4f46e5',
+  },
+  cancelButton: {
+    backgroundColor: '#e5e7eb',
+    
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+    fontSize: 14,
+  },
+  cancelButtonText: {
+    color: '#818D96',
+    fontWeight: 'bold',
+    fontSize: 14,
+    paddingVertical:30,
+    textDecorationLine:'underline'
+  },
 });
 
 export default HomePage;

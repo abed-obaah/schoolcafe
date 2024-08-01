@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, ImageBackground, StyleSheet } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons'; // Import FontAwesome for star icons
+import { FontAwesome,Ionicons } from '@expo/vector-icons'; // Import FontAwesome for star icons
 
 const Card = ({ imageSrc, title, details, featured, views, rating,location }) => {
   return (
@@ -10,7 +10,11 @@ const Card = ({ imageSrc, title, details, featured, views, rating,location }) =>
           <View style={styles.overlay}>
             <View style={styles.overlayTop}>
               {featured && <Text style={styles.featuredText}>Featured</Text>}
-              <Text style={styles.viewsText}>{views} views</Text>
+              <View style={{flexDirection:'row',alignItems:'center'}}>
+                    <Ionicons name="eye-outline" size={24} color="white" />
+                    <Text style={styles.viewsText}> {views} </Text>
+              </View>
+              
             </View>
             <View style={styles.ratingContainer}>
               {[...Array(5)].map((_, i) => (
@@ -36,23 +40,24 @@ const Card = ({ imageSrc, title, details, featured, views, rating,location }) =>
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: 10,
+    borderRadius: 20,
     overflow: 'hidden',
     marginBottom: 20,
     borderWidth: 1,
     borderColor: '#ddd',
     alignItems: 'center', // Center the content of the card
-    width: 280, // Set a fixed width for the card
+    width: 300, // Set a fixed width for the card
+    // height:380
   },
   imageContainer: {
     padding: 10, // Add padding around the image
   },
   image: {
-    width: 250, // Reduce the width of the image
+    width: 280, // Reduce the width of the image
     height: 150,
   },
   imageStyle: {
-    borderRadius: 10,
+    borderRadius: 20,
   },
   overlay: {
     flex: 1,
@@ -70,9 +75,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     paddingVertical: 4,
     borderRadius: 50,
+    fontSize:10,
+    paddingLeft:10,
+    paddingRight:10
   },
   viewsText: {
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    // backgroundColor: 'rgba(0, 0, 0, 0.6)',
     color: 'white',
     paddingHorizontal: 4,
     paddingVertical: 3,

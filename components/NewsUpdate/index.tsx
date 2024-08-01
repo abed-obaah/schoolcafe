@@ -9,16 +9,45 @@ const people = [
       head: '2024/2025 WAEC Syllabus for All Subjects | Read & Download PDF',
       nameImage:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       subjects: {
-        math: 'Mathematics',
-        // english: 'English Language',
-        biology: 'Biology',
-        // chemistry: 'Chemistry',
-        // physics: 'Physics',
-        // Add more subjects as needed
+        waec: 'Waec',
+       
+        jamb: 'Jamb',
+        
       },
       imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     },
-    // More people...
+    {
+        name: 'L. Alexander',
+        email: 'leslie.alexander@example.com',
+        role: 'Co-Founder / CEO',
+        head: '2024/2025 WAEC Syllabus for All Subjects | Read & Download PDF',
+        nameImage:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        subjects: {
+          waec: 'Waec',
+          english: 'English Language',
+          jamb: 'Jamb',
+          // chemistry: 'Chemistry',
+          // physics: 'Physics',
+          // Add more subjects as needed
+        },
+        imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      },
+      {
+        name: 'L. Alexander',
+        email: 'leslie.alexander@example.com',
+        role: 'Co-Founder / CEO',
+        head: '2024/2025 WAEC Syllabus for All Subjects | Read & Download PDF',
+        nameImage:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        subjects: {
+          math: 'Mathematics',
+          english: 'English Language',
+        //   biology: 'Biology',
+          // chemistry: 'Chemistry',
+          // physics: 'Physics',
+          // Add more subjects as needed
+        },
+        imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      },
   ];
 
 const Example = () => {
@@ -33,7 +62,8 @@ const Example = () => {
           </View>
         <TouchableOpacity style={styles.touchable}>
         <Text style={styles.names}>{item.head}</Text>
-        <View>
+
+        <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Image source={{ uri: item.imageUrl }} style={styles.images} />
                     <Text style={styles.name}>{item.name}</Text>
         </View>
@@ -70,9 +100,15 @@ const styles = StyleSheet.create({
     
   },
   image: {
-    width: 80,
-    height: 80,
+    width: 90,
+    height: 90,
     borderRadius: 20,
+    marginRight: 12,
+  },
+  images: {
+    width: 30,
+    height: 30,
+    borderRadius: 50,
     marginRight: 12,
   },
   infoContainer: {
@@ -84,14 +120,16 @@ const styles = StyleSheet.create({
     marginTop:20
   },
   name: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
+    fontSize: 10,
+    fontWeight: '600',
+    color: '#818D96',
+    marginLeft:-10
   },
   names: {
     fontSize: 10,
     fontWeight: '500',
     color: '#333',
+    marginTop:-20
   },
   role: {
     fontSize: 14,

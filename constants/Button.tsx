@@ -1,10 +1,9 @@
-// GradientButton.js
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons'; // Make sure to install this package
 
-const GradientButton = ({ onPress,label }) => {
+const GradientButton = ({ onPress, label, showIcon = true }) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.buttonContainer}>
       <LinearGradient
@@ -14,8 +13,8 @@ const GradientButton = ({ onPress,label }) => {
         style={styles.gradient}
       >
         <View style={styles.buttonContent}>
-        <Text style={styles.buttonText}>{label}</Text>
-          <MaterialIcons name="keyboard-arrow-right" size={24} color="#fff" />
+          <Text style={styles.buttonText}>{label}</Text>
+          {showIcon && <MaterialIcons name="keyboard-arrow-right" size={24} color="#fff" />}
         </View>
       </LinearGradient>
     </TouchableOpacity>
@@ -24,7 +23,7 @@ const GradientButton = ({ onPress,label }) => {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    borderRadius: 5,
+    borderRadius: 9,
     overflow: 'hidden', // Ensure the gradient doesn't overflow the button
   },
   gradient: {
