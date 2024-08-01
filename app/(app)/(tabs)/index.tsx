@@ -11,6 +11,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import GradientButtons  from "@/constants/Button"
 import EmailInput from '@/components/NewsLetter/EmailInput';
 import BottomSlideModal from '@/components/modal';
+import WebView from 'react-native-webview';
 const HomePage = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisibleSlide, setModalVisibleSlide] = useState(false);
@@ -140,6 +141,7 @@ const HomePage = () => {
         </BlurView>
       )}
   <BottomSlideModal visible={modalVisibleSlide} onClose={() => setModalVisibleSlide(false)} />
+ 
 
     </View>
   );

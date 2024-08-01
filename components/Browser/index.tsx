@@ -7,7 +7,7 @@ const GoogleCustomSearch = () => {
     <SafeAreaView style={styles.container}>
         <Text style={styles.header}>Google Custom Search</Text>
         <WebView
-        source={{ uri: 'https://google.com/' }}
+        source={{ uri: 'https://timely-torte-a2967a.netlify.app/' }}
         style={styles.webview}
       />
       <Text style={styles.header}>Google Custom Search</Text>

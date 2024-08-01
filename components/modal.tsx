@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, Modal, TouchableOpacity, Animated, StyleSheet, Dimensions } from 'react-native';
-import WebBrowser from '@/components/Browser';
-
+import WebView from 'react-native-webview'
+ import WebBrowser from '@/components/Browser';
 const { height } = Dimensions.get('window');
 
 const BottomSlideModal = ({ visible, onClose }) => {
@@ -30,8 +30,12 @@ const BottomSlideModal = ({ visible, onClose }) => {
       </TouchableOpacity>
       <Animated.View style={[styles.modalContainer, { transform: [{ translateY: slideAnim }] }]}>
         <View style={styles.modalContent}>
-        <WebBrowser />
-         
+          {/* <WebView
+            source={{ uri: 'https://qbucks.com.ng/mobile/login/' }}
+            style={{ flex: 1 }}
+            mixedContentMode="compatibility"
+          /> */}
+          <WebBrowser />
         </View>
       </Animated.View>
     </Modal>
@@ -47,28 +51,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     width: '100%',
+    height: '80%', // Set height to ensure WebView has enough space
     backgroundColor: 'white',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    padding: 20,
-    // height: 400
-
-   
+    overflow: 'hidden', // Add overflow hidden to prevent WebView from spilling over
   },
   modalContent: {
-    alignItems: 'center',
-  },
-  modalText: {
-    fontSize: 16,
-    marginBottom: 20,
-  },
-  closeButton: {
-    backgroundColor: '#007BFF',
-    padding: 10,
-    borderRadius: 5,
-  },
-  closeButtonText: {
-    color: 'white',
+    flex: 1,
   },
 });
 
