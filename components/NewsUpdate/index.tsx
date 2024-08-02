@@ -80,6 +80,8 @@ const Example = () => {
       renderItem={renderItem}
       keyExtractor={item => item.email}
       contentContainerStyle={styles.container}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
     />
   );
 };

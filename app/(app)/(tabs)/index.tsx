@@ -12,6 +12,9 @@ import GradientButtons  from "@/constants/Button"
 import EmailInput from '@/components/NewsLetter/EmailInput';
 import BottomSlideModal from '@/components/modal';
 import WebView from 'react-native-webview';
+
+
+
 const HomePage = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisibleSlide, setModalVisibleSlide] = useState(false);
@@ -95,6 +98,8 @@ const HomePage = () => {
             horizontal={true}
             ItemSeparatorComponent={ItemSeparator}
             contentContainerStyle={styles.contentContainer}
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
           />
         </View>
 

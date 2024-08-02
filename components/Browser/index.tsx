@@ -1,17 +1,34 @@
 import React from 'react';
-import { StyleSheet, SafeAreaView, Text } from 'react-native';
+import { StyleSheet, SafeAreaView, Text, View } from 'react-native';
 import { WebView } from 'react-native-webview';
+import DidYouKnow from './DidYouKnow';
+import { MaterialIcons,AntDesign } from '@expo/vector-icons';
+import Footer from './Footer'
+
+
 
 const GoogleCustomSearch = () => {
   return (
     <SafeAreaView style={styles.container}>
-        <Text style={styles.header}>Google Custom Search</Text>
+  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+  <AntDesign name="arrowleft" size={24} color="black" style={{marginLeft:10}} />
+  <Text style={[styles.header, { flex: 1, textAlign: 'center' }]}>Browser</Text>
+</View>
+
+
+      
         <WebView
         source={{ uri: 'https://timely-torte-a2967a.netlify.app/' }}
         style={styles.webview}
+        startInLoadingState
+        renderLoading={()=> (
+          <View style={{flex:1,marginTop:-20}}>
+            {/* <Text>Loading....</Text> */}
+            <DidYouKnow/>
+          </View>
+        )}
       />
-      <Text style={styles.header}>Google Custom Search</Text>
-     
+     <Footer/>
     </SafeAreaView>
   );
 };
