@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import PostCard from '@/components/PostCard';
+import DetailsSection from '@/components/School/DetailsSection'; // Adjust the path as needed
+import { detailsData } from '@/components/School/detailsData';
 
 const ProfilePage = ({ profile, tabs, team }) => {
   const [activeButton, setActiveButton] = useState('Posts');
@@ -85,16 +87,9 @@ const ProfilePage = ({ profile, tabs, team }) => {
 
       {/* Description list */}
       <View style={styles.descriptionContainer}>
-        {/* {Object.keys(profile.fields).map((field) => (
-          <View key={field} style={styles.fieldContainer}>
-            <Text style={styles.fieldLabel}>{field}</Text>
-            <Text style={styles.fieldValue}>{profile.fields[field]}</Text>
-          </View>
-        ))} */}
 
             <View  style={styles.fieldContainer}>
                 <Text style={styles.fieldLabel}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reprehenderit incidunt, at quibusdam hic perferendis, porro vel, voluptas voluptate aperiam eveniet vitae modi consectetur deleniti eius adipisci magnam! Praesentium, laboriosam labore.</Text>
-                <Text style={styles.fieldValue}>hello</Text>
             </View>
             
         <View style={styles.aboutContainer}>
@@ -118,14 +113,14 @@ const ProfilePage = ({ profile, tabs, team }) => {
               <TouchableOpacity
                 style={[
                   styles.button,
-                  activeButton === 'about' && styles.activeButton,
+                  activeButton === 'About' && styles.activeButton,
                 ]}
-                onPress={() => setActiveButton('about')}
+                onPress={() => setActiveButton('About')}
               >
                 <Text
                   style={[
                     styles.buttonText,
-                    activeButton === 'about' && styles.activeButtonText,
+                    activeButton === 'About' && styles.activeButtonText,
                   ]}
                 >
                   About
@@ -151,6 +146,8 @@ const ProfilePage = ({ profile, tabs, team }) => {
               
             </View>
         </View>
+
+
         {/* Conditional rendering based on active tab */}
       <View style={styles.contentContainer}>
         {activeButton === 'Posts' && (
@@ -162,8 +159,14 @@ const ProfilePage = ({ profile, tabs, team }) => {
         )}
         {activeButton === 'About' && (
           <View style={styles.aboutContainer}>
-            <Text style={styles.fieldLabel}>About Content</Text>
-            <Text style={styles.fieldValue}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Reprehenderit incidunt, at quibusdam hic perferendis, porro vel, voluptas voluptate aperiam eveniet vitae modi consectetur deleniti eius adipisci magnam! Praesentium, laboriosam labore.</Text>
+            {detailsData.map((item, index) => (
+                <DetailsSection
+                  key={index}
+                  iconName={item.iconName}
+                  mainText={item.mainText}
+                  subText={item.subText}
+                />
+              ))}
           </View>
         )}
         {activeButton === 'Contact info' && (
