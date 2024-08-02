@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, Pressable } from 'react-native';
 import { MaterialIcons, FontAwesome, Entypo, Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 
@@ -8,6 +8,12 @@ const ProfilePage = () => {
     router.back();
   };
   const [activeButton, setActiveButton] = useState('about');
+  
+  const handlePress = () => {
+    router.push({ pathname: '/userDetail/Profile',
+        //  params: { userId: id } 
+        });
+  };
 
   return (
     <View style={styles.container}>
@@ -17,7 +23,10 @@ const ProfilePage = () => {
         </TouchableOpacity>
         <Text style={styles.title}>Profile Settings</Text>
       </View>
-      <Image source={{ uri: 'https://via.placeholder.com/150' }} style={styles.profileImage} />
+      <TouchableOpacity onPress={handlePress}>
+            <Image source={{ uri: 'https://via.placeholder.com/150' }} style={styles.profileImage} />
+      </TouchableOpacity>
+     
       <Text style={styles.nameText}>Jeremiah Omonefe</Text>
       <Text style={styles.companyText}>VC at Fame Academy</Text>
 
@@ -88,19 +97,27 @@ const ProfilePage = () => {
       </View>
 
       <View style={styles.infoContainer}>
-        <Text style={styles.infoText}>Member since February 4, 2024</Text>
-        <Text style={styles.infoText}>Last seen 56 minutes ago</Text>
+        <View style={{flexDirection:'row',alignItems:'center'}}>
+                <Ionicons name="calendar-outline" size={20} color="gray" />
+                <Text style={[styles.infoText,{marginLeft:10}]}>Member since February 4, 2024</Text>
+        </View>
+     
+        
+        <View style={{flexDirection:'row',alignItems:'center'}}>
+                <Ionicons name="time-outline" size={20} color="gray" />
+                <Text style={[styles.infoText,{marginLeft:10}]}>Last seen 56 minutes ago</Text>
+        </View>
         <View>
-            <Text>Bio</Text>
+            <Text style={styles.bold}>Bio</Text>
             <Text style={styles.test}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</Text>
         </View>
         <View style={{marginTop:10}}>
-            <Text>Location</Text>
-            <Text>Delta state, Nigeria</Text>
+            <Text style={styles.bold}>Location</Text>
+            <Text style={styles.test}>Delta state, Nigeria</Text>
         </View>
         <View style={{marginTop:10}}>
-            <Text>Birthday</Text>
-            <Text>September, 11</Text>
+            <Text style={styles.bold}>Birthday</Text>
+            <Text style={styles.test}>September, 11</Text>
         </View>
     </View>
     </View>
@@ -166,7 +183,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   activeButton: {
-    backgroundColor: '#4F46E5', // bg-indigo-500
+    backgroundColor: '#1972BF', // bg-indigo-500
     fontSize: 14, // text-sm
     fontWeight: 'bold', // font-semibold
     shadowColor: '#000', // shadow-sm
@@ -185,11 +202,15 @@ const styles = StyleSheet.create({
   infoText: {
     fontSize: 12,
     color: 'gray',
-    marginVertical:30,
+    marginVertical:20,
     fontWeight:'400'
   },
   test:{
-    color:'#2C2C2C'
+    color:'#2C2C2C',
+    fontWeight:'400'
+  },
+  bold:{
+    fontWeight:'500'
   }
 });
 
