@@ -19,12 +19,12 @@ const HomePage = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisibleSlide, setModalVisibleSlide] = useState(false);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setModalVisible(true);
-  //   }, 3000);
-  //   return () => clearTimeout(timer);
-  // }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setModalVisible(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const data = [
     {

@@ -7,6 +7,8 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { AuthProvider } from '@/context/auth';
+import { ToastProvider } from 'react-native-toast-notifications'
+import React from 'react';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -28,9 +30,15 @@ export default function RootLayout() {
   }
 
   return (
+    
     <AuthProvider>
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Slot/>
+      <ToastProvider
+      successColor="#1972BF"
+      swipeEnabled={true}
+      >
+          <Slot/>
+      </ToastProvider>
     </ThemeProvider>
     </AuthProvider>
   );

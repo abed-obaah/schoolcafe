@@ -6,12 +6,12 @@ export const detailsData = [
       subText: 'mobile',
     },
     {
-      iconName: 'settings',
+      iconName: 'mail',
       mainText: 'Info@delsu.edu.ng',
       subText: 'Email',
     },
     {
-        iconName: 'settings',
+        iconName: 'camera',
         mainText: 'Delsu.official',
         subText: 'Instagram',
       },

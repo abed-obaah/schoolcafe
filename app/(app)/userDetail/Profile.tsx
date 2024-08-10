@@ -1,12 +1,68 @@
-import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import React, { useEffect, useState } from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Modal, Pressable,} from 'react-native';
+import { FontAwesome, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import PostCard from '@/components/PostCard';
 import DetailsSection from '@/components/School/DetailsSection'; // Adjust the path as needed
 import { detailsData } from '@/components/School/detailsData';
+import COLORS from '@/constants/Colorsb';
+import { useToast } from "react-native-toast-notifications";
+import { BlurView } from 'expo-blur';
+import EmailInput from '@/components/NewsLetter/ClaimSchool';
+import GradientButtons  from "@/constants/Button"
+
+
+
+
 
 const ProfilePage = ({ profile, tabs, team }) => {
   const [activeButton, setActiveButton] = useState('Posts');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisiblePop, setModalVisiblePop] = useState(false);
+
+  const toast = useToast();
+
+
+  const handleButtonClaimSchoolClick = () => {
+    setModalVisiblePop(true)
+    // showToast();
+    setModalVisible(false)
+  }
+
+  const handleButtonClick = () => {
+    setModalVisible(false)
+    showToast();
+   
+  };
+
+  const handleButtonSavedClick = () => {
+    setModalVisible(false)
+    showToastSaved();
+   
+  };
+
+  const showToast = () => {
+    toast.show("    Link copied    ", {
+      type: "success",
+      placement: "bottom",
+      duration: 4000,
+      offset: 30,
+      animationType: "slide-in",
+    });
+  };
+  const showToastSaved = () => {
+    toast.show("    Saved    ", {
+      type: "success",
+      placement: "bottom",
+      duration: 4000,
+      offset: 30,
+      animationType: "slide-in",
+    });
+  };
+  
+  const handleIconPress = () => {
+    console.log('Icon Pressed!'); // Confirm function is called
+    alert('Icon Pressed!');
+  };
   const posts = [
     {
       id: '1',
@@ -35,7 +91,7 @@ const ProfilePage = ({ profile, tabs, team }) => {
       reactionText: 'Reaction from Jeff and 23 others',
     },
     {
-      id: '2',
+      id: '3',
       universityName: 'Delta state university',
       postedTime: 'Posted 23hrs ago',
       title: 'Important information about SchoolCafe.ng',
@@ -49,7 +105,21 @@ const ProfilePage = ({ profile, tabs, team }) => {
     },
     // Add more posts here
   ];
-  
+
+  const handleMorePress = () => {
+    setModalVisible(true);
+  };
+  // const copyToast =() => {
+  //   toast.show("Link copied", {
+  //     type: "success",
+  //     placement: "bottom",
+  //     duration: 4000,
+  //     offset: 30,
+  //     animationType: "slide-in",
+  //   });
+  // }
+
+
   return (
     <ScrollView style={styles.container}>
       {/* Profile header */}
@@ -153,7 +223,7 @@ const ProfilePage = ({ profile, tabs, team }) => {
         {activeButton === 'Posts' && (
           <View style={styles.postsContainer}>
             {posts.map((post) => (
-              <PostCard key={post.id} post={post} />
+              <PostCard key={post.id} post={post} onMorePress={handleMorePress} />
             ))}
           </View>
         )}
@@ -165,6 +235,7 @@ const ProfilePage = ({ profile, tabs, team }) => {
                   iconName={item.iconName}
                   mainText={item.mainText}
                   subText={item.subText}
+                  onIconPress={handleIconPress} 
                 />
               ))}
           </View>
@@ -176,10 +247,88 @@ const ProfilePage = ({ profile, tabs, team }) => {
           </View>
         )}
       </View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <TouchableOpacity  onPress={handleButtonClick} style={{flexDirection:'row',alignItems:'center',marginBottom:20}}>
+              <View style={{backgroundColor:'#D9D9D9',borderRadius:50,padding:10}}>
+                  <FontAwesome name="chain" size={19} color="black" />
+              </View>
+              <Text style={{ color: COLORS.Shade_Black, fontWeight: '400',marginLeft:10 }}>Copy link</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleButtonSavedClick} style={{flexDirection:'row',alignItems:'center',marginBottom:20}}>
+              <View style={{backgroundColor:'#D9D9D9',borderRadius:50,padding:12}}>
+              <MaterialCommunityIcons name="bookmark-outline" size={19} color="black" />
+              </View>
+              <Text style={{ color: COLORS.Shade_Black, fontWeight: '400',marginLeft:10 }}>Save</Text>
+            </TouchableOpacity>
+          
+            <TouchableOpacity onPress={handleButtonClaimSchoolClick} style={{flexDirection:'row',alignItems:'center',marginBottom:10}}>
+              <View style={{backgroundColor:'#D9D9D9',borderRadius:50,padding:10}}>
+              <MaterialIcons name="keyboard-double-arrow-up" size={19} color="black" />
+              </View>
+              <Text style={{ color: COLORS.Shade_Black, fontWeight: '400',marginLeft:10 }}>Claim School</Text>
+            </TouchableOpacity>
+          
+          
+            {/* <TouchableOpacity onPress={() => setModalVisible(false)}>
+              <View style={styles.modalButton}>
+                <Text style={styles.modalButtonText}>Close</Text>
+              </View>
+            </TouchableOpacity> */}
+          </View>
+        </View>
+      </Modal>
+
+
+  
       </View>
 
-      
+      {modalVisiblePop && (
+        <BlurView intensity={100}  tint='dark' style={styles.sabsolute}>
+          <Modal
+            transparent={true}
+            animationType="fade"
+            visible={modalVisiblePop}
+            onRequestClose={() => setModalVisiblePop(false)}
+          >
+            <View style={styles.scenteredView}>
+              <View style={styles.smodalView}>
+               
+                <View style={styles.stextContainer}>
+                  <Text style={styles.stitle}>Claim school ownership</Text>
+                  <Text style={styles.sdescription}>
+                  Claim school ownership and become the official admin and Contact person of Delta state university on SchoolCafe.
+                  </Text>
+                </View>
+                <EmailInput/>
+                <Text style={{fontSize:10,color:COLORS.Warning_70}}>Note: Enter only an official email belonging to the school E.G info@Delsu.edu.ng, gmail, yahoomail and other general mail are not accepted</Text>
 
+                <View style={styles.sbuttonContainer}>
+                <GradientButtons
+                 label="                          Claim now                                  "
+                onPress={() => {}}
+                showIcon={false}
+                style={{ width: '100%'}}
+              />
+
+
+                  <TouchableOpacity onPress={()=>setModalVisiblePop(false)}>
+                      <Text style={styles.scancelButtonText}>Cancel</Text>
+                  </TouchableOpacity>
+                
+                </View>
+              </View>
+            </View>
+          </Modal>
+        </BlurView>
+      )}
+     
      
     </ScrollView>
   );
@@ -352,6 +501,122 @@ const styles = StyleSheet.create({
   activeButtonText: {
     color: '#ffffff', // text-white
   },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'flex-end',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    padding: 25,
+    // alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: -2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalText: {
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  modalButton: {
+    backgroundColor: COLORS.Gray_200,
+    width: '100%',
+    alignItems: 'center',
+    paddingVertical: 14,
+    paddingHorizontal: 147,
+    borderRadius: 8,
+  },
+  modalButtonText: {
+    color: COLORS.Warning_100,
+    width: '100%',
+    textAlign: 'center',
+  },
+
+
+
+  // pop up
+  sabsolute: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
+  scenteredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // paddingHorizontal:-10
+  },
+  smodalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 8,
+    padding: 16,
+    // alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  siconContainer: {
+    backgroundColor: '#d1fae5',
+    borderRadius: 50,
+    padding: 10,
+  },
+  sicon: {
+    width: 24,
+    height: 24,
+    tintColor: '#065f46', // Darker green tint color
+  },
+  stextContainer: {
+    marginTop: 16,
+    marginBottom:20,
+    alignItems: 'center',
+  },
+ stitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#111827',
+  },
+  sdescription: {
+    fontSize: 14,
+    color: '#6b7280',
+    textAlign: 'center',
+    marginTop: 8,
+  },
+  sbuttonContainer: {
+    flexDirection: 'col',
+    marginTop: 16,
+    alignContent:'center',
+    alignItems:'center'
+  },
+  sbutton: {
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginHorizontal: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  scancelButtonText:{
+    color: '#818D96',
+    fontWeight: 'bold',
+    fontSize: 14,
+    paddingVertical:20,
+    textDecorationLine:'underline'
+  }
 });
 
 export default ProfilePage;

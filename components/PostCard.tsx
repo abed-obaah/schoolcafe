@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post,onMorePress }) => {
   return (
     <View style={styles.card}>
       <View style={styles.header}>
@@ -14,7 +14,7 @@ const PostCard = ({ post }) => {
           <Text style={styles.universityName}>{post.universityName}</Text>
           <Text style={styles.postedTime}>{post.postedTime}</Text>
         </View>
-        <TouchableOpacity style={styles.moreIcon}>
+        <TouchableOpacity style={styles.moreIcon} onPress={onMorePress}>
           <MaterialIcons name="more-horiz" size={24} color="black" />
         </TouchableOpacity>
       </View>
