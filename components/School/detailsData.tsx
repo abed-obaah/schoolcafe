@@ -1,39 +1,37 @@
-// detailsData.js
 export const detailsData = [
-    {
-      iconName: 'info',
-      mainText: '+2349058389203',
-      subText: 'mobile',
-    },
-    {
-      iconName: 'mail',
-      mainText: 'Info@delsu.edu.ng',
-      subText: 'Email',
-    },
-    {
-        iconName: 'camera',
-        mainText: 'Delsu.official',
-        subText: 'Instagram',
-      },
-      {
-        iconName: 'settings',
-        mainText: 'Delsu.officialHQ',
-        subText: 'Twitter',
-      },
-      {
-        iconName: 'settings',
-        mainText: 'Delta state university',
-        subText: 'Linkedin',
-      },
-      {
-        iconName: 'settings',
-        mainText: 'delsu.edu.ng',
-        subText: 'Website',
-      },
-      {
-        iconName: 'settings',
-        mainText: 'Rating - 4.0 (2 reviews)',
-        subText: 'Public rating',
-      },
-  ];
-  
+  {
+    icons: [{ type: 'MaterialIcons', name: 'phone' }],
+    mainText: '+2349058389203',
+    subText: 'mobile',
+  },
+  {
+    icons: [{ type: 'MaterialIcons', name: 'mail' }],
+    mainText: 'Info@delsu.edu.ng',
+    subText: 'Email',
+  },
+  {
+    icons: [{ type: 'AntDesign', name: 'instagram' }],
+    mainText: 'Delsu.official',
+    subText: 'Instagram',
+  },
+  {
+    icons: [{ type: 'FontAwesome6', name: 'x-twitter' }],
+    mainText: 'Delsu.officialHQ',
+    subText: 'Twitter',
+  },
+  {
+    icons: [{ type: 'FontAwesome', name: 'linkedin-square' }],
+    mainText: 'Delta State University',
+    subText: 'LinkedIn',
+  },
+  {
+    icons: [{ type: 'FontAwesome', name: 'chain' }],
+    mainText: 'delsu.edu.ng',
+    subText: 'Website',
+  },
+  {
+    icons: [{ type: 'MaterialIcons', name: 'star' }],
+    mainText: 'Rating - 4.0 (2 reviews)',
+    subText: 'Public rating',
+  },
+];

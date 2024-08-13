@@ -1,18 +1,33 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import { MaterialIcons, FontAwesome, FontAwesome6, AntDesign } from '@expo/vector-icons';
 
-const DetailsSection = ({ iconName, mainText, subText }) => {
+const DetailsSection = ({ icons, mainText, subText, isBlue, onLastItemClick, isLastItem }) => {
+  const renderIcon = (icon) => {
+    switch (icon.type) {
+      case 'MaterialIcons':
+        return <MaterialIcons name={icon.name} size={20} color="black" />;
+      case 'FontAwesome':
+        return <FontAwesome name={icon.name} size={20} color="black" />;
+      case 'FontAwesome6':
+        return <FontAwesome6 name={icon.name} size={20} color="black" />;
+      case 'AntDesign':
+        return <AntDesign name={icon.name} size={20} color="black" />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={isLastItem ? onLastItemClick : null} style={styles.container}>
       <View style={styles.iconContainer}>
-        <MaterialIcons name={iconName} size={24} color="black" />
+        {icons.length > 0 && renderIcon(icons[0])}
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.mainText}>{mainText}</Text>
+        <Text style={[styles.mainText, isBlue && styles.blueText]}>{mainText}</Text>
         {subText && <Text style={styles.subText}>{subText}</Text>}
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -27,19 +42,19 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: 'center',
     borderRadius: 50,
-    justifyContent: 'center', // Ensures icon is centered vertically
-  },
-  icon: {
-    marginRight: 6,
+    justifyContent: 'center',
   },
   textContainer: {
     flex: 1,
     justifyContent: 'center',
-    paddingLeft:6
+    paddingLeft: 6,
   },
   mainText: {
     fontSize: 12,
     fontWeight: '500',
+  },
+  blueText: {
+    color: '#1972BF',
   },
   subText: {
     fontSize: 14,

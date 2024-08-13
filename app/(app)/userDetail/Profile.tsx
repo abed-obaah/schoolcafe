@@ -18,9 +18,15 @@ const ProfilePage = ({ profile, tabs, team }) => {
   const [activeButton, setActiveButton] = useState('Posts');
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisiblePop, setModalVisiblePop] = useState(false);
+  const [modalVisibleRating, setModalVisibleRating] = useState(false);
+
+
 
   const toast = useToast();
 
+  const handleLastItemClick = () => {
+    setModalVisibleRating(true);
+  };
 
   const handleButtonClaimSchoolClick = () => {
     setModalVisiblePop(true)
@@ -193,7 +199,7 @@ const ProfilePage = ({ profile, tabs, team }) => {
                     activeButton === 'About' && styles.activeButtonText,
                   ]}
                 >
-                  About
+                  Abouts
                 </Text>
               </TouchableOpacity>
           
@@ -230,13 +236,15 @@ const ProfilePage = ({ profile, tabs, team }) => {
         {activeButton === 'About' && (
           <View style={styles.aboutContainer}>
             {detailsData.map((item, index) => (
-                <DetailsSection
-                  key={index}
-                  iconName={item.iconName}
-                  mainText={item.mainText}
-                  subText={item.subText}
-                  onIconPress={handleIconPress} 
-                />
+                 <DetailsSection
+                 key={index}
+                 icons={item.icons}
+                 mainText={item.mainText}
+                 subText={item.subText}
+                 isBlue={index >= detailsData.length - 2}
+                 isLastItem={index === detailsData.length - 1} // Check if it's the last item
+                 onLastItemClick={handleLastItemClick}
+               />
               ))}
           </View>
         )}
@@ -273,6 +281,43 @@ const ProfilePage = ({ profile, tabs, team }) => {
               <MaterialIcons name="keyboard-double-arrow-up" size={19} color="black" />
               </View>
               <Text style={{ color: COLORS.Shade_Black, fontWeight: '400',marginLeft:10 }}>Claim School</Text>
+            </TouchableOpacity>
+          
+          
+            {/* <TouchableOpacity onPress={() => setModalVisible(false)}>
+              <View style={styles.modalButton}>
+                <Text style={styles.modalButtonText}>Close</Text>
+              </View>
+            </TouchableOpacity> */}
+          </View>
+        </View>
+      </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisibleRating}
+        onRequestClose={() => setModalVisibleRating(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={[styles.modalContent,{alignContent:'center'}]}>
+            <TouchableOpacity  onPress={handleButtonClick} style={{flexDirection:'row',alignItems:'center',marginBottom:20}}>
+              <View style={{backgroundColor:'#D9D9D9',borderRadius:50,padding:10}}>
+                  <FontAwesome name="chain" size={19} color="black" />
+              </View>
+              <Text style={{ color: COLORS.Shade_Black, fontWeight: '400',marginLeft:10 }}>Copy link</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleButtonSavedClick} style={{flexDirection:'row',alignItems:'center',marginBottom:20}}>
+              <View style={{backgroundColor:'#D9D9D9',borderRadius:50,padding:12}}>
+              <MaterialCommunityIcons name="bookmark-outline" size={19} color="black" />
+              </View>
+              <Text style={{ color: COLORS.Shade_Black, fontWeight: '400',marginLeft:10 }}>Saves</Text>
+            </TouchableOpacity>
+          
+            <TouchableOpacity onPress={handleButtonClaimSchoolClick} style={{flexDirection:'row',alignItems:'center',marginBottom:10}}>
+              <View style={{backgroundColor:'#D9D9D9',borderRadius:50,padding:10}}>
+              <MaterialIcons name="keyboard-double-arrow-up" size={19} color="black" />
+              </View>
+              <Text style={{ color: COLORS.Shade_Black, fontWeight: '400',marginLeft:10 }}>Claim Schools</Text>
             </TouchableOpacity>
           
           
