@@ -1,102 +1,246 @@
+// TabTwoScreen.js
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Image, Platform } from 'react-native';
+import { StyleSheet, Text, Image, Platform, SafeAreaView, View, KeyboardAvoidingView, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 
 import { Collapsible } from '@/components/Collapsible';
 import { ExternalLink } from '@/components/ExternalLink';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import smallIcon from '@/assets/icons/verify.png'; // Path to your small icon
+import React, { useState } from 'react';
+import { MaterialIcons } from '@expo/vector-icons';
+import Badge from '@/components/School/index'; 
+import News from '@/components/NewsUpdate/News'
+import University  from '@/components/School/university'
+import People from '@/components/School/people';
+import { router } from 'expo-router';
+
+
 
 export default function TabTwoScreen() {
+  const [selectedBadge, setSelectedBadge] = useState('Saved');
+  const [activeButton, setActiveButton] = useState('all');
+
+
+  const trendingView = () => {
+      router.push("/(app)/TrendingScreen/")
+  }
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={<Ionicons size={310} name="code-slash" style={styles.headerImage} />}>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/splash.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText> library
-          to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>News and updates</Text>
+        <Image source={smallIcon} style={styles.smallIcon} />
+      </View>
+
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            activeButton === 'all' && styles.activeButton,
+          ]}
+          onPress={() => setActiveButton('all')}
+        >
+          <Text
+            style={[
+              styles.buttonText,
+              activeButton === 'all' && styles.activeButtonText,
+            ]}
+          >
+            All
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            activeButton === 'Education' && styles.activeButton,
+          ]}
+          onPress={() => setActiveButton('Education')}
+        >
+          <Text
+            style={[
+              styles.buttonText,
+              activeButton === 'Education' && styles.activeButtonText,
+            ]}
+          >
+            Education
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            activeButton === 'Finance' && styles.activeButton,
+          ]}
+          onPress={() => setActiveButton('Finance')}
+        >
+          <Text
+            style={[
+              styles.buttonText,
+              activeButton === 'Finance' && styles.activeButtonText,
+            ]}
+          >
+            Finance
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            activeButton === 'Sport' && styles.activeButton,
+          ]}
+          onPress={() => setActiveButton('Sport')}
+        >
+          <Text
+            style={[
+              styles.buttonText,
+              activeButton === 'Sport' && styles.activeButtonText,
+            ]}
+          >
+            Sport
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+     
+
+      <View style={styles.containerBadges}>
+        <Text style={styles.containerBagesText}>Popular sources</Text>
+         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.scrollContainer}>
+            <View style={styles.containerBadge}>
+              <View style={styles.imagePlaceholder}></View>
+              <View style={styles.imagePlaceholder}></View>
+              <View style={styles.imagePlaceholder}></View>
+              <View style={styles.imagePlaceholder}></View>
+              <View style={styles.imagePlaceholder}></View>
+              <View style={styles.imagePlaceholder}></View>
+              <View style={styles.imagePlaceholder}></View>
+            </View>
+          </ScrollView>
+      
+      </View>
+
+      <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+        <Text style={{fontSize:14,fontWeight:'600'}}>Trending</Text>
+        <TouchableOpacity onPress={trendingView}>
+            <Text style={{color:'#1972BF',fontSize:10}}>View all</Text>
+        </TouchableOpacity>
+        
+      </View>
+
+      {selectedBadge === 'Saved' && <News />}
+      {selectedBadge === 'University' && <University />}
+      {selectedBadge === 'People' && <People />}
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  safeArea: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: '#fff', // Adjust based on your theme
+    paddingVertical: 60,
   },
-  titleContainer: {
+  header: {
     flexDirection: 'row',
-    gap: 8,
+    alignItems: 'center',
+    justifyContent: 'space-between', // Distributes space between Text and Image
+    paddingHorizontal: 10,
+    marginBottom:30
+  },
+  headerText: {
+    fontSize: 24, // Adjust as needed
+    fontWeight: 'bold',
+  },
+  smallIcon: {
+    width: 40, // Size of the small icon
+    height: 40,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    backgroundColor: 'rgba(217, 217, 217, 0.37)',
+    // paddingHorizontal: 20,
+    borderRadius: 50,
+    padding: 10,
+  },
+  icon: {
+    marginRight: 10,
+    color: "white",
+  },
+  input: {
+    flex: 1,
+    height: 40,
+    color: 'black',
+    fontSize: 14,
+  },
+  containers: {
+    alignItems: 'center',
+  },
+  containerBadges:{
+  marginTop: 20,
+  // flexDirection: 'row',
+  alignItems: 'flex-start',
+  justifyContent: 'flex-start', 
+  },
+  containerBagesText:{
+    paddingHorizontal: 10,
+  },
+  // containerBadge: {
+  //   flexDirection: 'row', // Flex items side by side
+  //   justifyContent: 'space-around', // Space items evenly
+  //   alignItems: 'center', // Align items vertically center
+  //   width: '100%', // Ensure full width
+  //   padding: 10, // Optional: Add padding for spacing
+  // },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between', // Already set to space the buttons evenly
+    width: '90%',
+    alignSelf: 'flex-start', // Optional: center the entire button container
+  },
+  
+  button: {
+    backgroundColor: '#d9d9d959',
+    paddingVertical: 5,
+    borderRadius: 5,
+    width: 80, // Fixed width for all buttons
+    alignItems: 'center', // Center the text inside the button
+    marginHorizontal: 5, // Add horizontal space between buttons
+  
+  },
+  buttonText: {
+    color: '#818D96',
+    fontSize: 13,
+    
+  },
+  activeButton: {
+    backgroundColor: '#1972BF', // bg-indigo-500
+    fontSize: 14, // text-sm
+    fontWeight: 'bold', // font-semibold
+    shadowColor: '#000', // shadow-sm
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  activeButtonText: {
+    color: '#ffffff', // text-white
+  },
+  scrollContainer: {
+    width: '100%', // Ensures the scroll area takes the full width
+  },
+  containerBadge: {
+    flexDirection: 'row', // Flex items side by side
+    alignItems: 'center', // Align items vertically center
+    padding: 10, // Optional: Add padding for spacing
+  },
+  imagePlaceholder: {
+    width: 60,  // Placeholder size
+    height: 60, 
+    backgroundColor: '#d9d9d9', // Placeholder color
+    borderRadius: 30, // Half of width/height to make it circular
+    marginRight: 10, // Add margin between placeholders
   },
 });
