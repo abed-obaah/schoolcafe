@@ -20,6 +20,7 @@ const people = [
           // Add more subjects as needed
         },
         describe:"Delta State University is a public institution providing a comprehensive undergraduate and graduate curriculum to approximately 3,500 students representing all of the states and 50 different countries. Dozens of degree programs on the undergraduate level provide educational opportunities in the Colleges of Arts and Sciences, Business, and Education and in the Robert E. Smith School of Nursing. Graduate programs on the master’s, educational specialist, and doctoral levels provide advanced training in a broad range of disciplines",
+        acknowldge:'Acknowledging its beginning as a teacher’s college, the University sustains excellence in teacher education while continuing to expand offerings in traditional as well as unique programs of study. From the core disciplines such as arts, humanities, and sciences, to unique programs such as Commercial Aviation, the Delta Music Institute, and the nationally-recognized Geospatial Information Technology program, the University is committed to meeting the evolving needs of the students it serves. the nationally-recognized Geospatial Information Technology program, the University is committed to meeting the evolving needs of the students it serves.',
         imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
       {
@@ -37,6 +38,7 @@ const people = [
           // Add more subjects as needed
         },
         describe:"Delta State University is a public institution providing a comprehensive undergraduate and graduate curriculum to approximately 3,500 students representing all of the states and 50 different countries. Dozens of degree programs on the undergraduate level provide educational opportunities in the Colleges of Arts and Sciences, Business, and Education and in the Robert E. Smith School of Nursing. Graduate programs on the master’s, educational specialist, and doctoral levels provide advanced training in a broad range of disciplines",
+        acknowldge:'Acknowledging its beginning as a teacher’s college, the University sustains excellence in teacher education while continuing to expand offerings in traditional as well as unique programs of study. From the core disciplines such as arts, humanities, and sciences, to unique programs such as Commercial Aviation, the Delta Music Institute, and the nationally-recognized Geospatial Information Technology program, the University is committed to meeting the evolving needs of the students it serves. the nationally-recognized Geospatial Information Technology program, the University is committed to meeting the evolving needs of the students it serves.',
         imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
       {
@@ -54,6 +56,7 @@ const people = [
           // Add more subjects as needed
         },
         describe:"Delta State University is a public institution providing a comprehensive undergraduate and graduate curriculum to approximately 3,500 students representing all of the states and 50 different countries. Dozens of degree programs on the undergraduate level provide educational opportunities in the Colleges of Arts and Sciences, Business, and Education and in the Robert E. Smith School of Nursing. Graduate programs on the master’s, educational specialist, and doctoral levels provide advanced training in a broad range of disciplines",
+        acknowldge:'Acknowledging its beginning as a teacher’s college, the University sustains excellence in teacher education while continuing to expand offerings in traditional as well as unique programs of study. From the core disciplines such as arts, humanities, and sciences, to unique programs such as Commercial Aviation, the Delta Music Institute, and the nationally-recognized Geospatial Information Technology program, the University is committed to meeting the evolving needs of the students it serves. the nationally-recognized Geospatial Information Technology program, the University is committed to meeting the evolving needs of the students it serves.',
         imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
       {
@@ -71,6 +74,7 @@ const people = [
           // Add more subjects as needed
         },
         describe:"Delta State University is a public institution providing a comprehensive undergraduate and graduate curriculum to approximately 3,500 students representing all of the states and 50 different countries. Dozens of degree programs on the undergraduate level provide educational opportunities in the Colleges of Arts and Sciences, Business, and Education and in the Robert E. Smith School of Nursing. Graduate programs on the master’s, educational specialist, and doctoral levels provide advanced training in a broad range of disciplines",
+        acknowldge:'Acknowledging its beginning as a teacher’s college, the University sustains excellence in teacher education while continuing to expand offerings in traditional as well as unique programs of study. From the core disciplines such as arts, humanities, and sciences, to unique programs such as Commercial Aviation, the Delta Music Institute, and the nationally-recognized Geospatial Information Technology program, the University is committed to meeting the evolving needs of the students it serves. the nationally-recognized Geospatial Information Technology program, the University is committed to meeting the evolving needs of the students it serves.',
         imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
   // More people...

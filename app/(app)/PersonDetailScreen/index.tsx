@@ -1,48 +1,58 @@
 // app/PersonDetailScreen.js
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import { useRouter, useLocalSearchParams, router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function PersonDetailScreen() {
-  const { name, email, head, imageUrl, nameImage,describe } = useLocalSearchParams();
-
+  const { name, email, head, imageUrl, nameImage, describe, acknowldge } = useLocalSearchParams();
 
   const handleBackPress = () => {
     router.back();
   };
-  
+
   return (
-    <View style={styles.container}>
-         <View style={styles.headers}>
-            <TouchableOpacity onPress={handleBackPress}>
-              <Ionicons name="arrow-back" size={24} color="#1972BF" />
-            </TouchableOpacity>
-            <Text style={styles.titles}>{head}</Text>
-          </View>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <View style={styles.headers}>
+          <TouchableOpacity onPress={handleBackPress}>
+            <Ionicons name="arrow-back" size={24} color="#1972BF" />
+          </TouchableOpacity>
+          <Text style={styles.titles}>{head}</Text>
+        </View>
 
-
-      <Image source={{ uri: imageUrl }} style={styles.image} />
-      <Text style={styles.title}>{head}</Text>
-      <View style={styles.profileContainer}>
-        <Image source={{ uri: nameImage }} style={styles.profileImage} />
-        <Text>{name}</Text>
+        <Image source={{ uri: imageUrl }} style={styles.image} />
+        <Text style={styles.title}>{head}</Text>
+        <View style={styles.profileContainer}>
+          <Image source={{ uri: nameImage }} style={styles.profileImage} />
+          <Text>{name}</Text>
+        </View>
+        <Text>Email: {email}</Text>
+        <Text>{describe}</Text>
+        <View style={{marginTop:10}}>
+             <Text>{acknowldge}</Text>
+        </View>
+        
       </View>
-      <Text>Email: {email}</Text>
-      <Text> {describe}</Text>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: 'white',  // Full background color white
+  },
   container: {
+    flex: 1,
     padding: 16,
-    backgroundColor: 'white',
+    backgroundColor: 'white',  // Container background color white
   },
   image: {
     width: '100%',
     height: 200,
     borderRadius: 10,
+    marginBottom: 20,
   },
   profileContainer: {
     flexDirection: 'row',
@@ -58,6 +68,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: '600',
+    marginBottom: 20,
   },
   headers: {
     flexDirection: 'row',
@@ -72,3 +83,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+

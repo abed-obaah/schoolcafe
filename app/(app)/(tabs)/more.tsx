@@ -1,102 +1,150 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Image, Platform } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { FontAwesome5, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+export default function ToolsScreen() {
+  const recentlyUsed = [
+    { id: 1, name: 'Relocation letter tool', icon: 'map-marker-alt', library: 'FontAwesome5' },
+    { id: 2, name: 'Reposting letter tool', icon: 'file-alt', library: 'FontAwesome5' },
+    { id: 3, name: 'Topic Recommender', icon: 'book', library: 'FontAwesome5' },
+    { id: 4, name: 'CGPA Calculator', icon: 'calculator', library: 'FontAwesome5' },
+  ];
 
-export default function TabTwoScreen() {
+  const universityTools = [
+    { id: 1, name: 'Topic Recommender', icon: 'book', library: 'FontAwesome5' },
+    { id: 2, name: 'CGPA Calculator', icon: 'calculator', library: 'FontAwesome5' },
+    { id: 3, name: 'Aggregate Calculator', icon: 'chart-line', library: 'FontAwesome5' },
+    { id: 4, name: 'Search for Courses', icon: 'search', library: 'FontAwesome5' },
+    { id: 5, name: 'Check Admission Eligibility', icon: 'check-circle', library: 'FontAwesome5' },
+    { id: 6, name: 'Check Course Eligibility', icon: 'check-square', library: 'FontAwesome5' },
+    { id: 7, name: 'Check Subject Combination', icon: 'clipboard-check', library: 'FontAwesome5' },
+    { id: 8, name: 'Course Recommender', icon: 'lightbulb', library: 'FontAwesome5' },
+  ];
+
+  const nyscTools = [
+    { id: 1, name: 'PPA Recommender', icon: 'checkbox-multiple-marked-circle-outline', library: 'MaterialCommunityIcons' },
+    { id: 2, name: 'Relocation letter tool', icon: 'map-marker-alt', library: 'FontAwesome5' },
+    { id: 3, name: 'Reposting letter tool', icon: 'file-copy', library: 'MaterialIcons' },
+    { id: 4, name: 'NYSC Secretariat Locator', icon: 'building', library: 'FontAwesome5' },
+    { id: 5, name: 'NYSC Camp Locator', icon: 'campground', library: 'FontAwesome5' },
+    { id: 6, name: 'LGA Review', icon: 'edit', library: 'FontAwesome5' },
+  ];
+
+  const renderIcon = (icon, library) => {
+    switch (library) {
+      case 'FontAwesome5':
+        return <FontAwesome5 name={icon} size={24} color="#2C2C2C" />;
+      case 'Ionicons':
+        return <Ionicons name={icon} size={24} color="#2C2C2C" />;
+      case 'MaterialIcons':
+        return <MaterialIcons name={icon} size={24} color="#2C2C2C" />;
+      case 'MaterialCommunityIcons':
+        return <MaterialCommunityIcons name={icon} size={24} color="#2C2C2C" />;
+      default:
+        return null;
+    }
+  };
+
+  const renderToolItem = ({ item }) => (
+    <View style={styles.toolItem}>
+      {renderIcon(item.icon, item.library)}
+      <Text style={styles.toolText}>{item.name}</Text>
+    </View>
+  );
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={<Ionicons size={310} name="code-slash" style={styles.headerImage} />}>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/splash.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText> library
-          to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <FontAwesome5 name="arrow-left" size={24} color="black" />
+        <Text style={styles.headerTitle}>Schoolcafe's tools</Text>
+      </View>
+
+      {/* Recently Used Tools */}
+      <View style={styles.sectionContainer}>
+        <Text style={styles.sectionTitle}>Recently used</Text>
+        <FlatList
+          data={recentlyUsed}
+          renderItem={renderToolItem}
+          keyExtractor={(item) => item.id.toString()}
+          numColumns={4}
+          key={`recentlyUsed-${4}`}  // Unique key to force re-render
+          contentContainerStyle={styles.toolsContainer}
+        />
+      </View>
+
+      {/* University Tools */}
+      <View style={styles.sectionContainer}>
+        <Text style={styles.sectionTitle}>University tools</Text>
+        <FlatList
+          data={universityTools}
+          renderItem={renderToolItem}
+          keyExtractor={(item) => item.id.toString()}
+          numColumns={4}
+          key={`universityTools-${4}`}  // Unique key to force re-render
+          contentContainerStyle={styles.toolsContainer}
+        />
+      </View>
+
+      {/* NYSC Tools */}
+      <View style={styles.sectionContainer}>
+        <Text style={styles.sectionTitle}>NYSC tools</Text>
+        <FlatList
+          data={nyscTools}
+          renderItem={renderToolItem}
+          keyExtractor={(item) => item.id.toString()}
+          numColumns={3}
+          key={`nyscTools-${3}`}  // Unique key to force re-render
+          contentContainerStyle={styles.toolsContainer}
+        />
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    paddingHorizontal: 16,
+    paddingTop: 32, // Adjust this value to add more space at the top
   },
-  titleContainer: {
+  header: {
     flexDirection: 'row',
-    gap: 8,
+    alignItems: 'center',
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
+  },
+  headerTitle: {
+    marginLeft: 16,
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  sectionContainer: {
+    marginTop: 24,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
+    paddingBottom: 16,
+  },
+  sectionTitle: {
+    marginBottom: 8,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  toolsContainer: {
+    justifyContent: 'space-between',
+  },
+  toolItem: {
+    flex: 1,
+    alignItems: 'center',
+    marginBottom: 16,
+    marginHorizontal: 8,
+  },
+  toolText: {
+    marginTop: 8,
+    textAlign: 'center',
+    fontSize: 12,
+    color: '#818D96',
   },
 });
