@@ -1,8 +1,30 @@
-import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
-import { FontAwesome5, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, FlatList,Modal, TouchableOpacity, } from 'react-native';
+import { FontAwesome, FontAwesome5, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import COLORS from '@/constants/Colorsb';
+import GradientButtons  from "@/constants/Button"
+import BottomSlideModal from '@/components/ToolsModal';
+
+
+
+
 
 export default function ToolsScreen() {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisibleRating, setModalVisibleRating] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [bottomSlideModalData, setBottomSlideModalData] = useState(null);
+
+  const handleGradientButtonPress = () => {
+    if (selectedItem) {
+      console.log('Setting bottomSlideModalData:', selectedItem.name);
+      setBottomSlideModalData(selectedItem.name);
+      setModalVisibleRating(false); // Optionally close the current modal
+      setModalVisible(true); // Open the BottomSlideModal
+    }
+  };
+  
+  
   const recentlyUsed = [
     { id: 1, name: 'Relocation letter tool', icon: 'map-marker-alt', library: 'FontAwesome5' },
     { id: 2, name: 'Reposting letter tool', icon: 'file-alt', library: 'FontAwesome5' },
@@ -45,11 +67,20 @@ export default function ToolsScreen() {
     }
   };
 
+  const handleLastItemClick = (item) => {
+    setSelectedItem(item);
+    setModalVisibleRating(true);
+  };
+
+
   const renderToolItem = ({ item }) => (
-    <View style={styles.toolItem}>
+    <TouchableOpacity
+      style={styles.toolItem}
+      onPress={() => handleLastItemClick(item)}
+    >
       {renderIcon(item.icon, item.library)}
       <Text style={styles.toolText}>{item.name}</Text>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -98,6 +129,35 @@ export default function ToolsScreen() {
           contentContainerStyle={styles.toolsContainer}
         />
       </View>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisibleRating}
+        onRequestClose={() => setModalVisibleRating(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={[styles.modalContent,{alignContent:'center'}]}>
+          {selectedItem && (
+              <View style={styles.modalItem}>
+                <Text style={styles.modalItemName}>{selectedItem.name}</Text>
+              </View>
+            )}
+                 <GradientButtons
+                       label="                                  Continue     "
+                       onPress={handleGradientButtonPress}
+                        showIcon={false}
+                        style={{ width: '100%' }}
+                  />
+            <TouchableOpacity style={styles.modalButton} onPress={() => setModalVisibleRating(false)}>
+              <Text style={styles.modalButtonText}>Close</Text>
+            </TouchableOpacity>          
+          </View>
+        </View>
+      </Modal>
+      
+      <BottomSlideModal data={bottomSlideModalData} visible={modalVisible} onClose={() => setModalVisible(false)} />
+
     </View>
   );
 }
@@ -147,4 +207,54 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#818D96',
   },
+
+
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'flex-end',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    padding: 25,
+    // alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: -2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalText: {
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  modalButton: {
+    // backgroundColor: COLORS.Gray_200,
+    width: '100%',
+    alignItems: 'center',
+    paddingVertical: 14,
+    paddingHorizontal: 147,
+    borderRadius: 8,
+    marginTop:10
+  },
+  modalButtonText: {
+    color: COLORS.Warning_100,
+    width: '100%',
+    textAlign: 'center',
+  },
+  modalItem: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  modalItemName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#2C2C2C',
+  },
+
 });

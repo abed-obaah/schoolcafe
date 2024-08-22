@@ -1,26 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, Modal, TouchableOpacity, Animated, StyleSheet, Dimensions } from 'react-native';
-import WebView from 'react-native-webview'
- import WebBrowser from '@/components/Browser';
+import WebBrowser from '@/components/Tools/index'; // Should match the correct path
+
 const { height } = Dimensions.get('window');
 
-const BottomSlideModal = ({ visible, onClose }) => {
+const BottomSlideModal = ({ visible, onClose, data }) => {
   const slideAnim = useRef(new Animated.Value(height)).current;
 
   useEffect(() => {
-    if (visible) {
-      Animated.timing(slideAnim, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-      }).start();
-    } else {
-      Animated.timing(slideAnim, {
-        toValue: height,
-        duration: 300,
-        useNativeDriver: true,
-      }).start();
-    }
+    Animated.timing(slideAnim, {
+      toValue: visible ? 0 : height,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
   }, [visible]);
 
   return (
@@ -30,8 +22,8 @@ const BottomSlideModal = ({ visible, onClose }) => {
       </TouchableOpacity>
       <Animated.View style={[styles.modalContainer, { transform: [{ translateY: slideAnim }] }]}>
         <View style={styles.modalContent}>
-         
-          <WebBrowser />
+          {/* <Text style={styles.modalDataText}>Data: {data}</Text> */}
+          <WebBrowser data={data} />
         </View>
       </Animated.View>
     </Modal>
@@ -47,14 +39,19 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    height: '80%', // Set height to ensure WebView has enough space
+    height: '80%',
     backgroundColor: 'white',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    overflow: 'hidden', // Add overflow hidden to prevent WebView from spilling over
+    overflow: 'hidden',
   },
   modalContent: {
     flex: 1,
+  },
+  modalDataText: {
+    padding: 10,
+    fontSize: 16,
+    color: '#000',
   },
 });
 

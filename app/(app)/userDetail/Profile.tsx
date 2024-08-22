@@ -292,6 +292,7 @@ const ProfilePage = ({ profile, tabs, team }) => {
           </View>
         </View>
       </Modal>
+      
       <Modal
         animationType="slide"
         transparent={true}
