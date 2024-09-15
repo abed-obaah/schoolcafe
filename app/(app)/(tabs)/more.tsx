@@ -52,6 +52,15 @@ export default function ToolsScreen() {
     { id: 6, name: 'LGA Review', icon: 'edit', library: 'FontAwesome5' },
   ];
 
+  const profile = [
+    { id: 1, name: 'Me', icon: 'user-circle-o', library: 'FontAwesome' },
+    { id: 2, name: '', icon: '', library: 'FontAwesome5' },
+    { id: 3, name: '', icon: '', library: 'MaterialIcons' },
+    // { id: 4, name: 'NYSC Secretariat Locator', icon: 'building', library: 'FontAwesome5' },
+    // { id: 5, name: '', icon: 'campground', library: 'FontAwesome5' },
+    // { id: 6, name: '', icon: 'edit', library: 'FontAwesome5' },
+  ];
+
   const renderIcon = (icon, library) => {
     switch (library) {
       case 'FontAwesome5':
@@ -62,6 +71,8 @@ export default function ToolsScreen() {
         return <MaterialIcons name={icon} size={24} color="#2C2C2C" />;
       case 'MaterialCommunityIcons':
         return <MaterialCommunityIcons name={icon} size={24} color="#2C2C2C" />;
+        case 'FontAwesome':
+          return <FontAwesome name={icon} size={24} color="#2C2C2C" />;
       default:
         return null;
     }
@@ -126,6 +137,18 @@ export default function ToolsScreen() {
           keyExtractor={(item) => item.id.toString()}
           numColumns={3}
           key={`nyscTools-${3}`}  // Unique key to force re-render
+          contentContainerStyle={styles.toolsContainer}
+        />
+      </View>
+        {/* NYSC Tools */}
+        <View style={styles.sectionContainer}>
+        <Text style={styles.sectionTitle}>Profile settings</Text>
+        <FlatList
+          data={profile}
+          renderItem={renderToolItem}
+          keyExtractor={(item) => item.id.toString()}
+          numColumns={3}
+          key={`profile-${1}`}  // Unique key to force re-render
           contentContainerStyle={styles.toolsContainer}
         />
       </View>
@@ -194,16 +217,17 @@ const styles = StyleSheet.create({
   },
   toolsContainer: {
     justifyContent: 'space-between',
+  
   },
   toolItem: {
     flex: 1,
-    alignItems: 'center',
+    // alignItems: 'center',
     marginBottom: 16,
     marginHorizontal: 8,
   },
   toolText: {
     marginTop: 8,
-    textAlign: 'center',
+    // textAlign: 'center',
     fontSize: 12,
     color: '#818D96',
   },
